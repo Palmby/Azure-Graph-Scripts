@@ -1,0 +1,31 @@
+#Pulls all Distribution Groups and their members into a csv file
+#To pull from all groups, comment out the $groups variable before the Pipe
+#To pull from another group type, edit the {$_.GroupType -like "DistributionList"} and replace the 
+#Distribution list with another group type
+
+Connect-MsolService 
+
+$groups = Get-MSolgroup -all | Where-Object {$_.GroupType -like "DistributionList"}
+#comment out after the pipe if you want all distro and security group memberships pulled
+foreach ($group in $groups){ 
+$Group_GUID = $Group.ObjectId
+$Group_DisplayName = $Group.DisplayName
+$Groupmembers = Get-MsolGroupMember -GroupObjectID $Group_GUID 
+
+
+foreach ($GM in $groupmembers){
+$Properties = @{
+"Group"= $Group_DisplayName;
+"Member" = $GM.DisplayName;
+}
+
+
+$obj = New-Object -TypeName PSObject -Property $Properties 
+write-output $obj | sort-object Member | export-csv C:\users\$env:USERNAME\Desktop\list-$date.csv -NoTypeInformation -append -force 
+
+
+}
+}
+
+write-output "Completed. Please Check your Desktop for list.csv. ***Note, before running this script again, delete the file as this script will add fields instead of overwriting*** "
+pause
