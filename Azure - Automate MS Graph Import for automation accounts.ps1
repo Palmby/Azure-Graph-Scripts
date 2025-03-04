@@ -9,7 +9,7 @@ $AutomationAccount = Read-Host "Automation Account?: "
 #Install Microsoft.Graph
 $GraphModule = find-module Microsoft.Graph
 $DependencyList = $GraphModule | select -ExpandProperty Dependencies | ConvertTo-Json | ConvertFrom-Json
-$ModuleVersion = $GraphModule.Version
+$ModuleVersion = 2.24.0
 
 foreach ($Dependant in $DependencyList)
 {
@@ -24,7 +24,7 @@ foreach ($Dependant in $DependencyList)
 #Install Microsoft.Graph.Beta
 $GraphModule = find-module Microsoft.Graph.Beta
 $DependencyList = $GraphModule | select -ExpandProperty Dependencies | ConvertTo-Json | ConvertFrom-Json
-$ModuleVersion = $GraphModule.Version
+$ModuleVersion = 2.24.0
 
 foreach ($Dependant in $DependencyList)
 {
@@ -56,7 +56,7 @@ foreach ($Dependant in $DependencyList)
 #Install Microsoft.Graph
 $GraphModule = find-module Microsoft.Graph
 $DependencyList = $GraphModule | select -ExpandProperty Dependencies | ConvertTo-Json | ConvertFrom-Json
-$ModuleVersion = $GraphModule.Version
+$ModuleVersion = 2.24.0
 
 foreach ($Dependant in $DependencyList)
 {
@@ -71,7 +71,7 @@ foreach ($Dependant in $DependencyList)
 #Install Microsoft.Graph.Beta
 $GraphModule = find-module Microsoft.Graph.Beta
 $DependencyList = $GraphModule | select -ExpandProperty Dependencies | ConvertTo-Json | ConvertFrom-Json
-$ModuleVersion = $GraphModule.Version
+$ModuleVersion = 2.24.0
 
 foreach ($Dependant in $DependencyList)
 {
