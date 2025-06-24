@@ -45,13 +45,7 @@ foreach ($package in $wh)
 }
 }
 
-foreach ($lib in $libraries)
-{
-    $filename = [System.IO.Path]::getfilenamewithoutextension($lib)
-    $package = $filename -split "-" | select -first 1
 
-   New-AzAutomationPython3Package -automationaccountname $automationname -name $package -ResourceGroupName $resourcegroup -ContentLinkUri $lib
-}
 
-Write-Output: ".whl packages are located at C:\python_temp"
+Write-Output ".whl packages are located at C:\python_temp"
 
