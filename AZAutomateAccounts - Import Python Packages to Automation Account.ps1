@@ -1,8 +1,11 @@
 #import Python Packages into Azure Automation and its dependancies
+#NOTICE - this only works for 3.8.. the files will be under C:\python_temp to import for 3.10
+
+
 Connect-AzAccount
 
-$resourcegroup = read-host: "Resource Group name: "
-$automationname = read-host: "Automation Account Name: "
+$resourcegroup = Read-Host = "Resource Group: "
+$automationname = Read-Host = "Automation Job Name: "
 
 
 $input = Read-Host = "What Python Package to Insert: "
@@ -10,7 +13,7 @@ $input = Read-Host = "What Python Package to Insert: "
 
 $packageurl = "https://pypi.org/pypi/$input/json"
 
-$response = Invoke-RestMethod -Uri $pypiUrl
+$response = Invoke-RestMethod -Uri $packageurl
 
 
 
@@ -38,7 +41,7 @@ foreach ($package in $wh)
     $wheelUrls
     if ($wheelurls.count -gt 1)
     {
-        $pac = $wheelUrls | where {$_ -like "*win_amd64*"} | select -first 1
+        $pac = $wheelUrls | where {$_ -like "*win_amd64*" } | select -first 1
         $libraries += $pac
     }
 
@@ -57,6 +60,5 @@ foreach ($lib in $libraries)
    New-AzAutomationPython3Package -automationaccountname $automationname -name $package -ResourceGroupName $resourcegroup -ContentLinkUri $lib
 }
 
-cd C:\
-del C:\python_temp -force -recurse -Confirm:$false
-
+cd C:\ 
+del C:\python_temp -Recurse -Force
