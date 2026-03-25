@@ -9,7 +9,7 @@ $graphPermission = @(
 ) #You can add additional Permissions in here
 
 
-Connect-MgGraph
+Connect-MgGraph -Scopes "AppRoleAssignment.ReadWrite.All","Application.ReadWrite.All","Directory.ReadWrite.All"
 
 
 $managedIdentity = get-mgserviceprincipal -filter "displayName eq '$identity'"
